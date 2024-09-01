@@ -1,0 +1,53 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\luisd\\dev\\c#\\VentasApi\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{0D4BE4B4-3EB4-4741-AEC5-FA4BBF631D03}|VentasApi\\VentasApi.csproj|c:\\users\\luisd\\dev\\c#\\ventasapi\\ventasapi\\controllers\\facturascontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0D4BE4B4-3EB4-4741-AEC5-FA4BBF631D03}|VentasApi\\VentasApi.csproj|solutionrelative:ventasapi\\controllers\\facturascontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0D4BE4B4-3EB4-4741-AEC5-FA4BBF631D03}|VentasApi\\VentasApi.csproj|c:\\users\\luisd\\dev\\c#\\ventasapi\\ventasapi\\models\\factura.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0D4BE4B4-3EB4-4741-AEC5-FA4BBF631D03}|VentasApi\\VentasApi.csproj|solutionrelative:ventasapi\\models\\factura.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "FacturasController.cs",
+              "DocumentMoniker": "C:\\Users\\luisd\\dev\\c#\\VentasApi\\VentasApi\\Controllers\\FacturasController.cs",
+              "RelativeDocumentMoniker": "VentasApi\\Controllers\\FacturasController.cs",
+              "ToolTip": "C:\\Users\\luisd\\dev\\c#\\VentasApi\\VentasApi\\Controllers\\FacturasController.cs",
+              "RelativeToolTip": "VentasApi\\Controllers\\FacturasController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB0AAABBAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-31T02:42:29.369Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Factura.cs",
+              "DocumentMoniker": "C:\\Users\\luisd\\dev\\c#\\VentasApi\\VentasApi\\Models\\Factura.cs",
+              "RelativeDocumentMoniker": "VentasApi\\Models\\Factura.cs",
+              "ToolTip": "C:\\Users\\luisd\\dev\\c#\\VentasApi\\VentasApi\\Models\\Factura.cs",
+              "RelativeToolTip": "VentasApi\\Models\\Factura.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAArAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-31T02:49:21.571Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
