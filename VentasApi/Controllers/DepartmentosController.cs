@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
-using VentasApi.Models;
+using DepartamentosLibrary;
+using DepartamentosLibrary.Models;
 
 namespace VentasApi.Controllers
 {
@@ -9,10 +10,12 @@ namespace VentasApi.Controllers
     public class DepartmentosController : ControllerBase
     {
         private readonly DB _db;
+        private readonly Metodos departamentosLibrary;
 
         public DepartmentosController()
         {
             _db = new DB();
+            departamentosLibrary = new Metodos();
         }
 
         [HttpGet]
@@ -21,40 +24,14 @@ namespace VentasApi.Controllers
         {
             try
             {
-                using (var conn = _db.GetConnection())
+                var request = departamentosLibrary.Get();
+
+                if (request == null)
                 {
-                    conn.Open();
-
-                    string query = "SELECT * FROM Departamentos";
-                    SqlCommand cmd = new SqlCommand(query, conn);
-                    SqlDataReader reader = cmd.ExecuteReader();
-
-                    var departamentos = new List<Departamento>();
-
-
-                    while (reader.Read())
-                    {
-                        var departamento = new Departamento
-                        {
-                            Id = (int)reader["Id"],
-                            Nombre = reader["Nombre"].ToString()
-                        };
-
-                        departamentos.Add(departamento);
-                    }
-
-                    conn.Close();
-
-
-                    if (departamentos.Count > 0)
-                    {
-                        return Ok(departamentos);
-                    }
-                    else
-                    {
-                        return NotFound();
-                    }
+                    return NotFound();
                 }
+
+                return request;
             }
             catch (Exception ex)
             {
@@ -68,30 +45,14 @@ namespace VentasApi.Controllers
         {
             try
             {
-                using (var conn = _db.GetConnection())
+                var request = departamentosLibrary.GetById(id);
+
+                if (request == null)
                 {
-                    conn.Open();
-
-                    string query = $"SELECT * FROM departamentos WHERE id = @Id";
-                    SqlCommand cmd = new SqlCommand(query, conn);
-                    cmd.Parameters.AddWithValue("@Id", id);
-                    SqlDataReader reader = cmd.ExecuteReader();
-
-                    if (reader.Read())
-                    {
-                        Departamento departamento = new Departamento
-                        {
-                            Id = (int)(reader["Id"]),
-                            Nombre = reader["Nombre"].ToString()
-                        };
-
-                        conn.Close();
-
-                        return Ok(departamento);
-                    }
-
                     return NotFound();
                 }
+
+                return request;
             }
             catch (Exception ex)
             {
@@ -101,34 +62,18 @@ namespace VentasApi.Controllers
 
         [HttpDelete]
         [Route("id")]
-        public dynamic DeleteById(int id)
+        public dynamic Delete(int id)
         {
             try
             {
-                using (var conn = _db.GetConnection())
+                var request = departamentosLibrary.Delete(id);
+
+                if (request == null)
                 {
-                    conn.Open();
-
-                    string checkQuery = "SELECT COUNT(*) FROM departamentos WHERE id = @Id";
-                    SqlCommand checkCmd = new SqlCommand(checkQuery, conn);
-                    checkCmd.Parameters.AddWithValue("@Id", id);
-                    int count = (int)checkCmd.ExecuteScalar();
-
-                    if (count == 0)
-                    {
-                        return NotFound(new { message = "Department not found" });
-                    }
-
-                    string deleteQuery = "DELETE FROM departamentos WHERE id = @Id";
-                    SqlCommand deleteCmd = new SqlCommand(deleteQuery, conn);
-                    deleteCmd.Parameters.AddWithValue("@Id", id);
-                    deleteCmd.ExecuteNonQuery();
-
-                    conn.Close();
-
-                    return StatusCode(202, new { message = "Deleted successfully" });
-
+                    return NotFound();
                 }
+
+                return request;
             }
             catch (Exception ex)
             {
@@ -142,18 +87,14 @@ namespace VentasApi.Controllers
         {
             try
             {
-                using (var conn = _db.GetConnection())
+                var request = departamentosLibrary.Create(departamento);
+
+                if (request == null)
                 {
-                    conn.Open();
-
-                    string query = "INSERT INTO Departamentos (nombre) VALUES (@Nombre)";
-                    SqlCommand cmd = new SqlCommand(query, conn);
-                    cmd.Parameters.AddWithValue("@Nombre", departamento.Nombre);
-                    cmd.ExecuteNonQuery();
-
-                    conn.Close();
-                    return StatusCode(201, new { message = "Created Successfully" });
+                    return BadRequest();
                 }
+
+                return request;
             }
             catch (Exception ex)
             {
@@ -167,20 +108,14 @@ namespace VentasApi.Controllers
         {
             try
             {
-                using (var conn = _db.GetConnection())
+                var request = departamentosLibrary.Update(id, departamento);
+
+                if (request == null)
                 {
-                    conn.Open();
-
-                    string query = "UPDATE Departamentos SET nombre = @Nombre WHERE id = @Id";
-                    SqlCommand cmd = new SqlCommand(query, conn);
-                    cmd.Parameters.AddWithValue("@Nombre", departamento.Nombre);
-                    cmd.Parameters.AddWithValue("@Id", id);
-                    cmd.ExecuteNonQuery();
-
-                    conn.Close();
-                    return Ok(new { message = "Updated successfully" });
-
+                    return BadRequest();
                 }
+
+                return request;
             }
             catch (Exception ex)
             {

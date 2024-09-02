@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Data.SqlClient;
-using VentasApi.Models;
+using InventarioLibrary;
+using InventarioLibrary.Models;
 
 namespace VentasApi.Controllers
 {
@@ -9,9 +9,12 @@ namespace VentasApi.Controllers
     public class InventarioController : ControllerBase
     {
         private readonly DB _db;
+        private readonly Metodos inventarioLibrary;
+
         public InventarioController()
         {
             _db = new DB();
+            inventarioLibrary = new Metodos();
         }
 
         [HttpGet]
@@ -19,38 +22,11 @@ namespace VentasApi.Controllers
         {
             try
             {
-                using (var conn = _db.GetConnection())
-                {
-                    conn.Open();
+                var request = inventarioLibrary.Get();
 
-                    string query = "SELECT * FROM inventario";
-                    SqlCommand cmd = new SqlCommand(query, conn);
-                    SqlDataReader reader = cmd.ExecuteReader();
+                if (request == null) { return NotFound(); }
 
-                    List<Inventario> productos = new List<Inventario>();
-
-                    while (reader.Read())
-                    {
-                        Inventario producto = new Inventario
-                        {
-                            Id = (int)reader["Id"],
-                            Producto = reader["Producto"].ToString(),
-                            Precio = (decimal)reader["Precio"],
-                            inventario = (int)reader["Inventario"]
-                        };
-
-                        productos.Add(producto);
-                    }
-
-                    conn.Close();
-
-                    if (productos.Count > 0)
-                    {
-                        return Ok(productos);
-                    }
-
-                    return NotFound();
-                }
+                return request;
             }
             catch (Exception ex)
             {
@@ -64,32 +40,11 @@ namespace VentasApi.Controllers
         {
             try
             {
-                using (var conn = _db.GetConnection())
-                {
-                    conn.Open();
+                var request = inventarioLibrary.GetById(id);
 
-                    string query = "SELECT * FROM inventario WHERE id = @Id";
-                    SqlCommand cmd = new SqlCommand(query, conn);
-                    cmd.Parameters.AddWithValue("@Id", id);
-                    SqlDataReader reader = cmd.ExecuteReader();
+                if (request == null) { return NotFound(); }
 
-                    if (reader.Read())
-                    {
-                        Inventario producto = new Inventario
-                        {
-                            Id = (int)reader["Id"],
-                            Producto = reader["Producto"].ToString(),
-                            Precio = (decimal)reader["Precio"],
-                            inventario = (int)reader["Inventario"]
-                        };
-
-                        conn.Close();
-
-                        return Ok(producto);
-                    }
-
-                    return NotFound();
-                }
+                return request;
             }
             catch (Exception ex)
             {
@@ -103,35 +58,12 @@ namespace VentasApi.Controllers
         {
             try
             {
-                using (var conn = _db.GetConnection())
-                {
-                    conn.Open();
+                var request = inventarioLibrary.Create(producto);
 
-                    string query = "INSERT INTO inventario (producto, precio, inventario) VALUES (@Producto, @Precio, @Inventario)";
-                    SqlCommand cmd = new SqlCommand(query, conn);
-                    cmd.Parameters.AddWithValue("@Producto", producto.Producto);
-                    cmd.Parameters.AddWithValue("@Precio", producto.Precio);
-                    cmd.Parameters.AddWithValue("@Inventario", producto.inventario);
-                    cmd.ExecuteNonQuery();
+                if (request == null) { return BadRequest(); }
 
-                    conn.Close();
+                return request;
 
-                    conn.Open();
-                    string query2 = "SELECT * FROM inventario WHERE producto = @Producto";
-                    SqlCommand cmd2 = new SqlCommand(query2, conn);
-                    cmd2.Parameters.AddWithValue("@Producto", producto.Producto);
-                    SqlDataReader reader = cmd2.ExecuteReader();
-
-
-                    if (reader.Read())
-                    {
-                        conn.Close();
-                        return new { message = "Created successfully" };
-                    }
-
-                    conn.Close();
-                    return StatusCode(400, "Bad request");
-                }
             }
             catch (Exception ex)
             {
@@ -145,34 +77,12 @@ namespace VentasApi.Controllers
         {
             try
             {
-                using (var conn = _db.GetConnection())
-                {
-                    conn.Open();
+                var request = inventarioLibrary.Update(id, producto);
 
-                    string query = "SELECT * FROM inventario WHERE id = @Id";
-                    SqlCommand cmd = new SqlCommand(query, conn);
-                    cmd.Parameters.AddWithValue("@Id", id);
-                    SqlDataReader reader = cmd.ExecuteReader();
+                if (request == null) { return NotFound(); }
 
-                    if (!reader.Read())
-                    {
-                        return NotFound();
-                    }
+                return request;
 
-                    conn.Close();
-
-                    conn.Open();
-
-                    string query2 = "UPDATE inventario SET producto = @Producto, precio = @Precio, inventario = @Inventario WHERE id = @Id";
-                    SqlCommand cmd2 = new SqlCommand(query2, conn);
-                    cmd2.Parameters.AddWithValue("@Producto", producto.Producto);
-                    cmd2.Parameters.AddWithValue("@Precio", producto.Precio);
-                    cmd2.Parameters.AddWithValue("@Inventario", producto.inventario);
-                    cmd2.Parameters.AddWithValue("@Id", id);
-                    cmd2.ExecuteNonQuery();
-
-                    return StatusCode(201, new { message = "Updated successfully" });
-                }
             }
             catch (Exception ex)
             {
@@ -186,28 +96,12 @@ namespace VentasApi.Controllers
         {
             try
             {
-                using (var conn = _db.GetConnection())
-                {
-                    conn.Open();
+                var request = inventarioLibrary.Delete(id);
 
-                    string query = "SELECT * FROM inventario WHERE id = @Id";
-                    SqlCommand cmd = new SqlCommand(query, conn);
-                    cmd.Parameters.AddWithValue("@Id", id);
-                    SqlDataReader reader = cmd.ExecuteReader();
+                if (request == null) { return NotFound(); };
 
-                    if (!reader.Read()) { return NotFound(); }
+                return request;
 
-                    conn.Close();
-
-                    conn.Open();
-
-                    string query2 = "DELETE FROM inventario WHERE id = @Id";
-                    SqlCommand cmd2 = new SqlCommand(query2, conn);
-                    cmd2.Parameters.AddWithValue("@Id", id);
-                    cmd2.ExecuteNonQuery();
-
-                    return Ok(new { message = "Deleted successfully" });
-                }
             }
             catch (Exception ex)
             {

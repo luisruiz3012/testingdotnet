@@ -4,6 +4,66 @@
     "C:\\Users\\luisd\\dev\\c#\\VentasApi\\VentasApi\\VentasApi.csproj": {}
   },
   "projects": {
+    "C:\\Users\\luisd\\dev\\c#\\VentasApi\\ClientesLibrary\\ClientesLibrary.csproj": {
+      "restore": {
+        "projectUniqueName": "C:\\Users\\luisd\\dev\\c#\\VentasApi\\ClientesLibrary\\ClientesLibrary.csproj",
+        "projectName": "ClientesLibrary",
+        "projectPath": "C:\\Users\\luisd\\dev\\c#\\VentasApi\\ClientesLibrary\\ClientesLibrary.csproj",
+        "frameworks": {
+          "net48": {
+            "projectReferences": {}
+          }
+        }
+      },
+      "frameworks": {
+        "net48": {}
+      }
+    },
+    "C:\\Users\\luisd\\dev\\c#\\VentasApi\\DepartamentosLibrary\\DepartamentosLibrary.csproj": {
+      "restore": {
+        "projectUniqueName": "C:\\Users\\luisd\\dev\\c#\\VentasApi\\DepartamentosLibrary\\DepartamentosLibrary.csproj",
+        "projectName": "DepartamentosLibrary",
+        "projectPath": "C:\\Users\\luisd\\dev\\c#\\VentasApi\\DepartamentosLibrary\\DepartamentosLibrary.csproj",
+        "frameworks": {
+          "net48": {
+            "projectReferences": {}
+          }
+        }
+      },
+      "frameworks": {
+        "net48": {}
+      }
+    },
+    "C:\\Users\\luisd\\dev\\c#\\VentasApi\\EmpleadosLibrary\\EmpleadosLibrary.csproj": {
+      "restore": {
+        "projectUniqueName": "C:\\Users\\luisd\\dev\\c#\\VentasApi\\EmpleadosLibrary\\EmpleadosLibrary.csproj",
+        "projectName": "EmpleadosLibrary",
+        "projectPath": "C:\\Users\\luisd\\dev\\c#\\VentasApi\\EmpleadosLibrary\\EmpleadosLibrary.csproj",
+        "frameworks": {
+          "net48": {
+            "projectReferences": {}
+          }
+        }
+      },
+      "frameworks": {
+        "net48": {}
+      }
+    },
+    "C:\\Users\\luisd\\dev\\c#\\VentasApi\\InventarioLibrary\\InventarioLibrary.csproj": {
+      "restore": {
+        "projectUniqueName": "C:\\Users\\luisd\\dev\\c#\\VentasApi\\InventarioLibrary\\InventarioLibrary.csproj",
+        "projectName": "InventarioLibrary",
+        "projectPath": "C:\\Users\\luisd\\dev\\c#\\VentasApi\\InventarioLibrary\\InventarioLibrary.csproj",
+        "frameworks": {
+          "net48": {
+            "projectReferences": {}
+          }
+        }
+      },
+      "frameworks": {
+        "net48": {}
+      }
+    },
     "C:\\Users\\luisd\\dev\\c#\\VentasApi\\VentasApi\\VentasApi.csproj": {
       "version": "1.0.0",
       "restore": {
@@ -32,7 +92,20 @@
         "frameworks": {
           "net8.0": {
             "targetAlias": "net8.0",
-            "projectReferences": {}
+            "projectReferences": {
+              "C:\\Users\\luisd\\dev\\c#\\VentasApi\\ClientesLibrary\\ClientesLibrary.csproj": {
+                "projectPath": "C:\\Users\\luisd\\dev\\c#\\VentasApi\\ClientesLibrary\\ClientesLibrary.csproj"
+              },
+              "C:\\Users\\luisd\\dev\\c#\\VentasApi\\DepartamentosLibrary\\DepartamentosLibrary.csproj": {
+                "projectPath": "C:\\Users\\luisd\\dev\\c#\\VentasApi\\DepartamentosLibrary\\DepartamentosLibrary.csproj"
+              },
+              "C:\\Users\\luisd\\dev\\c#\\VentasApi\\EmpleadosLibrary\\EmpleadosLibrary.csproj": {
+                "projectPath": "C:\\Users\\luisd\\dev\\c#\\VentasApi\\EmpleadosLibrary\\EmpleadosLibrary.csproj"
+              },
+              "C:\\Users\\luisd\\dev\\c#\\VentasApi\\InventarioLibrary\\InventarioLibrary.csproj": {
+                "projectPath": "C:\\Users\\luisd\\dev\\c#\\VentasApi\\InventarioLibrary\\InventarioLibrary.csproj"
+              }
+            }
           }
         },
         "warningProperties": {

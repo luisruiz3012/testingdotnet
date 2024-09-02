@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Data.SqlClient;
-using VentasApi.Models;
+using ClientesLibrary.Models;
+using ClientesLibrary;
 
 namespace VentasApi.Controllers
 {
@@ -9,9 +9,11 @@ namespace VentasApi.Controllers
     public class ClientesController : ControllerBase
     {
         private readonly DB _db;
+        private readonly Metodos clientesLibrary;
         public ClientesController()
         {
             _db = new DB();
+            clientesLibrary = new Metodos();
         }
 
         [HttpGet]
@@ -19,37 +21,14 @@ namespace VentasApi.Controllers
         {
             try
             {
-                using (var conn = _db.GetConnection())
+                var clientes = clientesLibrary.Get();
+
+                if (clientes.Count > 0)
                 {
-                    conn.Open();
-
-                    string query = "SELECT * FROM clientes";
-                    SqlCommand cmd = new SqlCommand(query, conn);
-                    SqlDataReader reader = cmd.ExecuteReader();
-
-                    List<Cliente> clientes = new List<Cliente>();
-
-                    while (reader.Read())
-                    {
-                        Cliente cliente = new Cliente
-                        {
-                            Id = (int)reader["Id"],
-                            Nombre = reader["Nombre"].ToString(),
-                            Apellido = reader["Apellido"].ToString()
-                        };
-
-                        clientes.Add(cliente);
-                    }
-
-                    conn.Close();
-
-                    if (clientes.Count > 0)
-                    {
-                        return Ok(clientes);
-                    }
-
-                    return NotFound();
+                    return Ok(clientes);
                 }
+
+                return NotFound();
             }
             catch (Exception ex)
             {
@@ -63,31 +42,11 @@ namespace VentasApi.Controllers
         {
             try
             {
-                using (var conn = _db.GetConnection())
-                {
-                    conn.Open();
+                var cliente = clientesLibrary.GetById(id);
 
-                    string query = "SELECT * FROM clientes WHERE id = @Id";
-                    SqlCommand cmd = new SqlCommand(query, conn);
-                    cmd.Parameters.AddWithValue("@Id", id);
-                    SqlDataReader reader = cmd.ExecuteReader();
+                if (cliente == null) { return NotFound(); }
 
-                    if (reader.Read())
-                    {
-                        Cliente cliente = new Cliente
-                        {
-                            Id = (int)reader["Id"],
-                            Nombre = reader["Nombre"].ToString(),
-                            Apellido = reader["Apellido"].ToString()
-                        };
-
-                        conn.Close();
-
-                        return Ok(cliente);
-                    }
-
-                    return NotFound();
-                }
+                return cliente;
             }
             catch (Exception ex)
             {
@@ -101,35 +60,14 @@ namespace VentasApi.Controllers
         {
             try
             {
-                using (var conn = _db.GetConnection())
+                var requestCliente = clientesLibrary.Create(cliente);
+
+                if (requestCliente == new { error = "There was an error with your request" })
                 {
-                    conn.Open();
-
-                    string query = "INSERT INTO clientes (nombre, apellido) VALUES (@Nombre, @Apellido)";
-                    SqlCommand cmd = new SqlCommand(query, conn);
-                    cmd.Parameters.AddWithValue("@Nombre", cliente.Nombre);
-                    cmd.Parameters.AddWithValue("@Apellido", cliente.Apellido);
-                    cmd.ExecuteNonQuery();
-
-                    conn.Close();
-
-                    conn.Open();
-                    string query2 = "SELECT * FROM clientes WHERE nombre = @Nombre AND apellido = @Apellido";
-                    SqlCommand cmd2 = new SqlCommand(query2, conn);
-                    cmd2.Parameters.AddWithValue("@Nombre", cliente.Nombre);
-                    cmd2.Parameters.AddWithValue("@Apellido", cliente.Apellido);
-                    SqlDataReader reader = cmd2.ExecuteReader();
-
-
-                    if (reader.Read())
-                    {
-                        conn.Close();
-                        return new { message = "Created successfully" };
-                    }
-
-                    conn.Close();
-                    return StatusCode(400, "Bad request");
+                    return BadRequest();
                 }
+
+                return requestCliente;
             }
             catch (Exception ex)
             {
@@ -143,33 +81,14 @@ namespace VentasApi.Controllers
         {
             try
             {
-                using (var conn = _db.GetConnection())
+               var request = clientesLibrary.Update(id, cliente);
+
+                if (request == null)
                 {
-                    conn.Open();
-
-                    string query = "SELECT * FROM clientes WHERE id = @Id";
-                    SqlCommand cmd = new SqlCommand(query, conn);
-                    cmd.Parameters.AddWithValue("@Id", id);
-                    SqlDataReader reader = cmd.ExecuteReader();
-
-                    if (!reader.Read())
-                    {
-                        return NotFound();
-                    }
-
-                    conn.Close();
-
-                    conn.Open();
-
-                    string query2 = "UPDATE clientes SET nombre = @Nombre, apellido = @Apellido WHERE id = @Id";
-                    SqlCommand cmd2 = new SqlCommand(query2, conn);
-                    cmd2.Parameters.AddWithValue("@Nombre", cliente.Nombre);
-                    cmd2.Parameters.AddWithValue("@Apellido", cliente.Apellido);
-                    cmd2.Parameters.AddWithValue("@Id", id);
-                    cmd2.ExecuteNonQuery();
-
-                    return StatusCode(201, new { message = "Updated successfully" });
+                    return NotFound();
                 }
+
+                return request;
             }
             catch (Exception ex)
             {
@@ -183,28 +102,14 @@ namespace VentasApi.Controllers
         {
             try
             {
-                using (var conn = _db.GetConnection())
+                var request = clientesLibrary.Delete(id);
+
+                if (request == null)
                 {
-                    conn.Open();
-
-                    string query = "SELECT * FROM clientes WHERE id = @Id";
-                    SqlCommand cmd = new SqlCommand(query, conn);
-                    cmd.Parameters.AddWithValue("@Id", id);
-                    SqlDataReader reader = cmd.ExecuteReader();
-
-                    if (!reader.Read()) { return NotFound(); }
-
-                    conn.Close();
-
-                    conn.Open();
-
-                    string query2 = "DELETE FROM clientes WHERE id = @Id";
-                    SqlCommand cmd2 = new SqlCommand(query2, conn);
-                    cmd2.Parameters.AddWithValue("@Id", id);
-                    cmd2.ExecuteNonQuery();
-
-                    return Ok(new { message = "Deleted successfully" });
+                    return NotFound();
                 }
+
+                return request;
             }
             catch (Exception ex)
             {

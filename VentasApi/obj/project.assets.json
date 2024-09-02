@@ -672,6 +672,42 @@
         "runtime": {
           "lib/netcoreapp2.1/_._": {}
         }
+      },
+      "ClientesLibrary/1.0.0": {
+        "type": "project",
+        "compile": {
+          "bin/placeholder/ClientesLibrary.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/ClientesLibrary.dll": {}
+        }
+      },
+      "DepartamentosLibrary/1.0.0": {
+        "type": "project",
+        "compile": {
+          "bin/placeholder/DepartamentosLibrary.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/DepartamentosLibrary.dll": {}
+        }
+      },
+      "EmpleadosLibrary/1.0.0": {
+        "type": "project",
+        "compile": {
+          "bin/placeholder/EmpleadosLibrary.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/EmpleadosLibrary.dll": {}
+        }
+      },
+      "InventarioLibrary/1.0.0": {
+        "type": "project",
+        "compile": {
+          "bin/placeholder/InventarioLibrary.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/InventarioLibrary.dll": {}
+        }
       }
     }
   },
@@ -2095,10 +2131,34 @@
         "useSharedDesignerContext.txt",
         "version.txt"
       ]
+    },
+    "ClientesLibrary/1.0.0": {
+      "type": "project",
+      "path": "../ClientesLibrary/ClientesLibrary.csproj",
+      "msbuildProject": "../ClientesLibrary/ClientesLibrary.csproj"
+    },
+    "DepartamentosLibrary/1.0.0": {
+      "type": "project",
+      "path": "../DepartamentosLibrary/DepartamentosLibrary.csproj",
+      "msbuildProject": "../DepartamentosLibrary/DepartamentosLibrary.csproj"
+    },
+    "EmpleadosLibrary/1.0.0": {
+      "type": "project",
+      "path": "../EmpleadosLibrary/EmpleadosLibrary.csproj",
+      "msbuildProject": "../EmpleadosLibrary/EmpleadosLibrary.csproj"
+    },
+    "InventarioLibrary/1.0.0": {
+      "type": "project",
+      "path": "../InventarioLibrary/InventarioLibrary.csproj",
+      "msbuildProject": "../InventarioLibrary/InventarioLibrary.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net8.0": [
+      "ClientesLibrary >= 1.0.0",
+      "DepartamentosLibrary >= 1.0.0",
+      "EmpleadosLibrary >= 1.0.0",
+      "InventarioLibrary >= 1.0.0",
       "Microsoft.Data.SqlClient >= 5.2.2",
       "Swashbuckle.AspNetCore >= 6.4.0"
     ]
@@ -2135,7 +2195,20 @@
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\luisd\\dev\\c#\\VentasApi\\ClientesLibrary\\ClientesLibrary.csproj": {
+              "projectPath": "C:\\Users\\luisd\\dev\\c#\\VentasApi\\ClientesLibrary\\ClientesLibrary.csproj"
+            },
+            "C:\\Users\\luisd\\dev\\c#\\VentasApi\\DepartamentosLibrary\\DepartamentosLibrary.csproj": {
+              "projectPath": "C:\\Users\\luisd\\dev\\c#\\VentasApi\\DepartamentosLibrary\\DepartamentosLibrary.csproj"
+            },
+            "C:\\Users\\luisd\\dev\\c#\\VentasApi\\EmpleadosLibrary\\EmpleadosLibrary.csproj": {
+              "projectPath": "C:\\Users\\luisd\\dev\\c#\\VentasApi\\EmpleadosLibrary\\EmpleadosLibrary.csproj"
+            },
+            "C:\\Users\\luisd\\dev\\c#\\VentasApi\\InventarioLibrary\\InventarioLibrary.csproj": {
+              "projectPath": "C:\\Users\\luisd\\dev\\c#\\VentasApi\\InventarioLibrary\\InventarioLibrary.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

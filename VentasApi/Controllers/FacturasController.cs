@@ -65,14 +65,24 @@ namespace VentasApi.Controllers
                 {
                     conn.Open();
 
-                    string query = "EXEC ventas @Total @IdCliente @EmpleadoId @Cantidad @PrecioUnitario";
+                    // EXEC venta 1200.5, 2, 8, 4, 1, 1200.5;
+                    string query = "EXEC venta @Total, @IdCliente, @EmpleadoId, @IdProducto, @Cantidad, @PrecioUnitario";
                     SqlCommand cmd = new SqlCommand(query, conn);
+                    cmd.Parameters.AddWithValue("@Total", factura.Total);
+                    cmd.Parameters.AddWithValue("@IdCliente", factura.IdCliente);
+                    cmd.Parameters.AddWithValue("@EmpleadoId", factura.EmpleadoId);
+                    cmd.Parameters.AddWithValue("@IdProducto", factura.IdProducto);
+                    cmd.Parameters.AddWithValue("@Cantidad", factura.Cantidad);
+                    cmd.Parameters.AddWithValue("@PrecioUnitario", factura.PrecioUnitario);
+                    cmd.ExecuteNonQuery();
 
-                    return new { };
+                    conn.Close();
+
+                    return new { message = "Created successfully" };
                 }
             } catch (Exception ex)
             {
-                return StatusCode(500, $"Internal server error {ex.Message}");
+                return StatusCode(500, $"Internal server error {ex.Message}!");
             }
         }
     }

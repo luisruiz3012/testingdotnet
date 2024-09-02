@@ -66,3 +66,16 @@ C:\Users\luisd\dev\c#\VentasApi\VentasApi\bin\Debug\net8.0\runtimes\win-arm64\na
 C:\Users\luisd\dev\c#\VentasApi\VentasApi\bin\Debug\net8.0\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.dll
 C:\Users\luisd\dev\c#\VentasApi\VentasApi\bin\Debug\net8.0\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.dll
 C:\Users\luisd\dev\c#\VentasApi\VentasApi\bin\Debug\net8.0\runtimes\win\lib\net8.0\System.Runtime.Caching.dll
+C:\Users\luisd\dev\c#\VentasApi\VentasApi\bin\Debug\net8.0\ClientesLibrary.dll
+C:\Users\luisd\dev\c#\VentasApi\VentasApi\bin\Debug\net8.0\ClientesLibrary.pdb
+C:\Users\luisd\dev\c#\VentasApi\VentasApi\bin\Debug\net8.0\ClientesLibrary.dll.config
+C:\Users\luisd\dev\c#\VentasApi\VentasApi\obj\Debug\net8.0\VentasApi.sourcelink.json
+C:\Users\luisd\dev\c#\VentasApi\VentasApi\bin\Debug\net8.0\DepartamentosLibrary.dll
+C:\Users\luisd\dev\c#\VentasApi\VentasApi\bin\Debug\net8.0\DepartamentosLibrary.pdb
+C:\Users\luisd\dev\c#\VentasApi\VentasApi\bin\Debug\net8.0\DepartamentosLibrary.dll.config
+C:\Users\luisd\dev\c#\VentasApi\VentasApi\bin\Debug\net8.0\EmpleadosLibrary.dll
+C:\Users\luisd\dev\c#\VentasApi\VentasApi\bin\Debug\net8.0\EmpleadosLibrary.pdb
+C:\Users\luisd\dev\c#\VentasApi\VentasApi\bin\Debug\net8.0\EmpleadosLibrary.dll.config
+C:\Users\luisd\dev\c#\VentasApi\VentasApi\bin\Debug\net8.0\InventarioLibrary.dll
+C:\Users\luisd\dev\c#\VentasApi\VentasApi\bin\Debug\net8.0\InventarioLibrary.pdb
+C:\Users\luisd\dev\c#\VentasApi\VentasApi\bin\Debug\net8.0\InventarioLibrary.dll.config

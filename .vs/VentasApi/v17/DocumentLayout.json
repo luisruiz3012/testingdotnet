@@ -28,9 +28,9 @@
               "RelativeDocumentMoniker": "VentasApi\\Controllers\\FacturasController.cs",
               "ToolTip": "C:\\Users\\luisd\\dev\\c#\\VentasApi\\VentasApi\\Controllers\\FacturasController.cs",
               "RelativeToolTip": "VentasApi\\Controllers\\FacturasController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB0AAABBAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAXAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-31T02:42:29.369Z",
+              "WhenOpened": "2024-09-02T18:33:39.387Z",
               "EditorCaption": ""
             },
             {
@@ -41,9 +41,10 @@
               "RelativeDocumentMoniker": "VentasApi\\Models\\Factura.cs",
               "ToolTip": "C:\\Users\\luisd\\dev\\c#\\VentasApi\\VentasApi\\Models\\Factura.cs",
               "RelativeToolTip": "VentasApi\\Models\\Factura.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAArAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAApAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-31T02:49:21.571Z"
+              "WhenOpened": "2024-09-02T18:47:34.175Z",
+              "EditorCaption": ""
             }
           ]
         }

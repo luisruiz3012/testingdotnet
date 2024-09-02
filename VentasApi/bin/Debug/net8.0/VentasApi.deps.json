@@ -8,6 +8,10 @@
     ".NETCoreApp,Version=v8.0": {
       "VentasApi/1.0.0": {
         "dependencies": {
+          "ClientesLibrary": "1.0.0",
+          "DepartamentosLibrary": "1.0.0",
+          "EmpleadosLibrary": "1.0.0",
+          "InventarioLibrary": "1.0.0",
           "Microsoft.Data.SqlClient": "5.2.2",
           "Swashbuckle.AspNetCore": "6.4.0"
         },
@@ -398,7 +402,39 @@
       },
       "System.Text.Encodings.Web/4.7.2": {},
       "System.Text.Json/4.7.2": {},
-      "System.Threading.Tasks.Extensions/4.5.4": {}
+      "System.Threading.Tasks.Extensions/4.5.4": {},
+      "ClientesLibrary/1.0.0": {
+        "runtime": {
+          "ClientesLibrary.dll": {
+            "assemblyVersion": "1.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "DepartamentosLibrary/1.0.0": {
+        "runtime": {
+          "DepartamentosLibrary.dll": {
+            "assemblyVersion": "1.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "EmpleadosLibrary/1.0.0": {
+        "runtime": {
+          "EmpleadosLibrary.dll": {
+            "assemblyVersion": "1.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "InventarioLibrary/1.0.0": {
+        "runtime": {
+          "InventarioLibrary.dll": {
+            "assemblyVersion": "1.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      }
     }
   },
   "libraries": {
@@ -686,6 +722,26 @@
       "sha512": "sha512-zteT+G8xuGu6mS+mzDzYXbzS7rd3K6Fjb9RiZlYlJPam2/hU7JCBZBVEcywNuR+oZ1ncTvc/cq0faRr3P01OVg==",
       "path": "system.threading.tasks.extensions/4.5.4",
       "hashPath": "system.threading.tasks.extensions.4.5.4.nupkg.sha512"
+    },
+    "ClientesLibrary/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "DepartamentosLibrary/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "EmpleadosLibrary/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "InventarioLibrary/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
     }
   }
 }

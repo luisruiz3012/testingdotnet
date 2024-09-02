@@ -1,7 +1,6 @@
-﻿using Microsoft.AspNetCore.Http.HttpResults;
+﻿using EmpleadosLibrary;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Data.SqlClient;
-using VentasApi.Models;
+using EmpleadosLibrary.Models;
 
 namespace VentasApi.Controllers
 {
@@ -10,9 +9,11 @@ namespace VentasApi.Controllers
     public class EmpleadosController : ControllerBase
     {
         private readonly DB _db;
+        private readonly Metodos empleadosLibrary;
         public EmpleadosController()
         {
             _db = new DB();
+            empleadosLibrary = new Metodos();
         }
 
         [HttpGet]
@@ -21,35 +22,15 @@ namespace VentasApi.Controllers
         {
             try
             {
-                using (var conn = _db.GetConnection())
+                var request = empleadosLibrary.Get();
+
+                if (request == null)
                 {
-                    conn.Open();
-
-                    string query = "SELECT * FROM Empleados";
-                    SqlCommand cmd = new SqlCommand(query, conn);
-                    SqlDataReader reader = cmd.ExecuteReader();
-
-                    List<Empleado> empleados = new List<Empleado>();
-
-                    while (reader.Read())
-                    {
-                        Empleado empleado = new Empleado {
-                            Id = (int)reader["Id"],
-                            Nombre = reader["Nombre"].ToString(),
-                            Apellido = reader["Apellido"].ToString(),
-                            Departamento_Id = (int)reader["Departamento_id"],
-                        };
-
-                        empleados.Add(empleado);
-                    }
-
-                    if (empleados.Count > 0)
-                    {
-                        return Ok(empleados);
-                    }
-
                     return NotFound();
                 }
+
+                return request;
+
             } catch (Exception ex)
             {
                 return StatusCode(500, $"Internal server error: {ex.Message}");
@@ -62,30 +43,15 @@ namespace VentasApi.Controllers
         {
             try
             {
-                using(var conn = _db.GetConnection())
+                var request = empleadosLibrary.GetById(id);
+
+                if (request == null)
                 {
-                    conn.Open();
-
-                    string query = "SELECT * FROM Empleados WHERE id = @Id";
-                    SqlCommand cmd = new SqlCommand(query, conn);
-                    cmd.Parameters.AddWithValue("@Id", id);
-                    SqlDataReader reader = cmd.ExecuteReader();
-
-                    if (reader.Read())
-                    {
-                        Empleado empleado = new Empleado
-                        {
-                            Id = (int)reader["id"],
-                            Nombre = reader["Nombre"].ToString(),
-                            Apellido = reader["Apellido"].ToString(),
-                            Departamento_Id = (int)reader["Departamento_id"]
-                        };
-
-                        return Ok(empleado);
-                    }
-
                     return NotFound();
                 }
+
+                return request;
+
             } catch (Exception ex)
             {
                 return StatusCode(500, $"Internal server error {ex.Message}");
@@ -98,19 +64,15 @@ namespace VentasApi.Controllers
         {
             try
             {
-                using(var conn = _db.GetConnection())
+                var request = empleadosLibrary.Create(empleado);
+
+                if (request == null)
                 {
-                    conn.Open();
-
-                    string query = "INSERT INTO empleados (nombre, apellido, departamento_id) VALUES (@Nombre, @Apellido, @Departamento_Id)";
-                    SqlCommand cmd = new SqlCommand(query, conn);
-                    cmd.Parameters.AddWithValue("@Nombre", empleado.Nombre);
-                    cmd.Parameters.AddWithValue("@Apellido", empleado.Apellido);
-                    cmd.Parameters.AddWithValue("@Departamento_Id", empleado.Departamento_Id);
-                    cmd.ExecuteNonQuery();
-
-                    return new { empleado };
+                    return BadRequest();
                 }
+
+                return request;
+
             } catch (Exception ex)
             {
                 return StatusCode(500, $"Internal server error: {ex.Message}");
@@ -123,21 +85,15 @@ namespace VentasApi.Controllers
         {
             try
             {
-                using(var conn = _db.GetConnection())
+                var request = empleadosLibrary.Update(id, empleado);
+
+                if (request == null)
                 {
-                    conn.Open();
-
-                    string query = "UPDATE Empleados SET nombre = @Nombre, apellido = @Apellido, departamento_id = @Departamento_Id WHERE id = @Id";
-                    SqlCommand cmd = new SqlCommand(query, conn);
-                    cmd.Parameters.AddWithValue("@Nombre", empleado.Nombre);
-                    cmd.Parameters.AddWithValue("@Apellido", empleado.Apellido);
-                    cmd.Parameters.AddWithValue("@Departamento_id", empleado.Departamento_Id);
-                    cmd.Parameters.AddWithValue("@Id", id);
-                    cmd.ExecuteNonQuery();
-
-                    return StatusCode(200, new { messge = "Updated successfully" });
-
+                    return NotFound();
                 }
+
+                return request;
+
             } catch (Exception ex)
             {
                 return StatusCode(500, $"Internal server error: {ex.Message}");
@@ -150,32 +106,12 @@ namespace VentasApi.Controllers
         {
             try
             {
-                using (var conn = _db.GetConnection())
-                {
-                    conn.Open();
+                var request = empleadosLibrary.Delete(id);
 
-                    string query = "SELECT * FROM empleados WHERE id = @Id";
-                    SqlCommand cmd = new SqlCommand(query, conn);
-                    cmd.Parameters.AddWithValue("@Id", id);
-                    SqlDataReader reader = cmd.ExecuteReader();
+                if (request == null) { return NotFound(); }
 
-                    if (!reader.Read())
-                    {
-                        return NotFound();
-                    }
+                return request;
 
-                    conn.Close();
-
-                    conn.Open();
-                    string query2 = "DELETE FROM empleados WHERE id = @Id";
-                    cmd = new SqlCommand(query2, conn);
-                    cmd.Parameters.AddWithValue("@Id", id);
-                    cmd.ExecuteNonQuery();
-
-                    conn.Close();
-
-                    return new { message = "Deleted successfully" };
-                }
             } catch(Exception ex)
             {
                 return StatusCode(500, $"Internal server error: {ex.Message}");
